@@ -316,3 +316,38 @@ input[type="datetime-local"].has-value::-webkit-datetime-edit {
         transform: translateY(0);
     }
 }
+
+/* 通知提示系统 */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 16px 24px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    z-index: 10000;
+    transform: translateX(400px);
+    transition: transform 0.3s ease-out;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    max-width: 400px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.notification-success {
+    background: linear-gradient(45deg, #22c55e, #10b981);
+}
+
+.notification-error {
+    background: linear-gradient(45deg, #ef4444, #dc2626);
+}
+
+.notification-warning {
+    background: linear-gradient(45deg, #f59e0b, #d97706);
+}
+
+.notification-info {
+    background: linear-gradient(45deg, #8b5cf6, #7c3aed);
+}

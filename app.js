@@ -5,6 +5,74 @@ let currentFilter = 'all';
 let searchTerm = '';
 let deleteTaskId = null;
 
+// 友好的提示系统
+function showNotification(message, type = 'info') {
+    // 移除已存在的提示
+    const existingNotification = document.querySelector('.notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+
+    // 创建提示元素
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 16px 24px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 500;
+        z-index: 10000;
+        transform: translateX(400px);
+        transition: transform 0.3s ease-out;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    `;
+
+    // 根据类型设置样式
+    switch (type) {
+        case 'success':
+            notification.style.background = 'linear-gradient(45deg, #22c55e, #10b981)';
+            notification.innerHTML = `<i class="fas fa-check-circle mr-2"></i>${message}`;
+            break;
+        case 'error':
+            notification.style.background = 'linear-gradient(45deg, #ef4444, #dc2626)';
+            notification.innerHTML = `<i class="fas fa-exclamation-circle mr-2"></i>${message}`;
+            break;
+        case 'warning':
+            notification.style.background = 'linear-gradient(45deg, #f59e0b, #d97706)';
+            notification.innerHTML = `<i class="fas fa-exclamation-triangle mr-2"></i>${message}`;
+            break;
+        default:
+            notification.style.background = 'linear-gradient(45deg, #8b5cf6, #7c3aed)';
+            notification.innerHTML = `<i class="fas fa-info-circle mr-2"></i>${message}`;
+    }
+
+    document.body.appendChild(notification);
+
+    // 显示动画
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+
+    // 自动隐藏
+    setTimeout(() => {
+        notification.style.transform = 'translateX(400px)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 3000);
+}
+
+// 简化的提示函数
+function showSuccess(message) { showNotification(message, 'success'); }
+function showError(message) { showNotification(message, 'error'); }
+function showWarning(message) { showNotification(message, 'warning'); }
+function showInfo(message) { showNotification(message, 'info'); }
+
 // 初始化应用
 document.addEventListener('DOMContentLoaded', function() {
     createParticles();
@@ -42,14 +110,31 @@ function Task(id, title, description, dueDate, priority, category, completed = f
 
 // 添加任务
 function addTask() {
-    const title = document.getElementById('taskTitle').value.trim();
+    const titleElement = document.getElementById('taskTitle');
+    const title = titleElement.value.trim();
     const description = document.getElementById('taskDesc').value.trim();
     const dueDate = document.getElementById('taskDueDate').value;
     const priority = document.getElementById('taskPriority').value;
     const category = document.getElementById('taskCategory').value;
 
+    // 表单验证
     if (!title) {
-        alert('请输入任务标题');
+        showError('请输入任务标题');
+        titleElement.focus();
+        titleElement.classList.add('border-red-500');
+        setTimeout(() => titleElement.classList.remove('border-red-500'), 2000);
+        return;
+    }
+
+    if (title.length > 100) {
+        showError('任务标题不能超过100个字符');
+        titleElement.focus();
+        return;
+    }
+
+    if (description.length > 500) {
+        showError('任务描述不能超过500个字符');
+        document.getElementById('taskDesc').focus();
         return;
     }
 
@@ -75,6 +160,9 @@ function addTask() {
 
     // 重置表单样式
     document.getElementById('taskDueDate').classList.remove('has-value');
+
+    // 显示成功提示
+    showSuccess('任务添加成功！');
 }
 
 // 切换任务完成状态
@@ -170,7 +258,7 @@ function confirmDelete() {
 function clearCompleted() {
     const completedCount = tasks.filter(t => t.completed).length;
     if (completedCount === 0) {
-        alert('没有已完成的任务');
+        showWarning('没有已完成的任务');
         return;
     }
     document.getElementById('clearModal').classList.remove('hidden');
@@ -694,7 +782,8 @@ function saveEditTask(e) {
 
     const title = document.getElementById('editTaskTitle').value.trim();
     if (!title) {
-        alert('请输入任务标题');
+        showError('请输入任务标题');
+        document.getElementById('taskTitle').focus();
         return;
     }
 
