@@ -27,9 +27,12 @@
 
 ```
 TodoLists2/
-├── nexus-task-3.0.html     # 主应用文件 (v3.0) - 包含任务编辑功能
+├── nexus-task-3.0.html     # 主HTML结构文件
+├── styles.css              # 赛博朋克主题样式
+├── app.js                  # 应用逻辑代码
 ├── .gitignore              # Git忽略配置
-└── README.md               # 项目说明文档
+├── README.md               # 项目说明文档
+└── CLAUDE.md               # 开发指南
 ```
 
 ## 🚀 快速开始
