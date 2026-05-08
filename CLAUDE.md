@@ -42,14 +42,12 @@ php -S localhost:8000
 ### File Organization
 ```
 TodoLists2/
-├── nexus-task-3.0.html     # Main HTML structure
+├── nexus-task-3.0.html     # Main application file
 ├── styles.css              # Cyberpunk theme styles
 ├── app.js                  # Application logic
 ├── .gitignore              # Git configuration
 ├── README.md               # Chinese documentation
-├── CLAUDE.md               # Development guidelines
-└── commands/               # Helper scripts
-    └── fix-github-issue.md # GitHub issue resolution guide
+└── CLAUDE.md               # Development guidelines
 ```
 
 ## Technology Stack
