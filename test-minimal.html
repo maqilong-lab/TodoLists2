@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最小化测试 - 添加任务功能</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-900 text-white p-8">
+    <h1 class="text-2xl mb-6">添加任务功能测试</h1>
+
+    <!-- 简单的测试表单 -->
+    <div class="space-y-4 mb-6">
+        <input type="text" id="taskTitle" placeholder="任务标题" class="bg-gray-800 border border-gray-600 rounded px-4 py-2 text-white">
+        <input type="text" id="taskDesc" placeholder="任务描述" class="bg-gray-800 border border-gray-600 rounded px-4 py-2 text-white">
+        <input type="datetime-local" id="taskDueDate" class="bg-gray-800 border border-gray-600 rounded px-4 py-2 text-white">
+        <select id="taskPriority" class="bg-gray-800 border border-gray-600 rounded px-4 py-2 text-white">
+            <option value="medium">中优先级</option>
+        </select>
+        <select id="taskCategory" class="bg-gray-800 border border-gray-600 rounded px-4 py-2 text-white">
+            <option value="work">工作</option>
+        </select>
+        <button type="button" onclick="testAddTask()" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded text-white">
+            <i class="fas fa-plus mr-2"></i>测试添加任务
+        </button>
+    </div>
+
+    <div id="taskList" class="space-y-2"></div>
+    <div id="debugInfo" class="mt-4 text-sm text-gray-400"></div>
+
+    <script>
+        // 简化的任务数据和函数
+        let tasks = [];
+
+        function Task(id, title, description, dueDate, priority, category, completed = false) {
+            this.id = id;
+            this.title = title;
+            this.description = description;
+            this.dueDate = dueDate;
+            this.priority = priority;
+            this.category = category;
+            this.completed = completed;
+            this.createdAt = new Date().toISOString();
+        }
+
+        function testAddTask() {
+            console.log("testAddTask函数被调用");
+            document.getElementById('debugInfo').innerHTML += "<div>testAddTask函数被调用 - " + new Date().toLocaleTimeString() + "</div>";
+
+            const titleElement = document.getElementById('taskTitle');
+            const title = titleElement.value.trim();
+
+            if (!title) {
+                alert('请输入任务标题');
+                titleElement.focus();
+                return;
+            }
+
+            const newTask = new Task(
+                Date.now(),
+                title,
+                document.getElementById('taskDesc').value.trim(),
+                document.getElementById('taskDueDate').value,
+                document.getElementById('taskPriority').value,
+                document.getElementById('taskCategory').value,
+                false
+            );
+
+            tasks.push(newTask);
+            console.log("任务已添加:", newTask);
+            document.getElementById('debugInfo').innerHTML += "<div>✓ 任务已添加: " + title + "</div>";
+
+            // 显示任务
+            renderTestTasks();
+
+            // 清空输入框
+            document.getElementById('taskTitle').value = '';
+            document.getElementById('taskDesc').value = '';
+            document.getElementById('taskDueDate').value = '';
+        }
+
+        function renderTestTasks() {
+            const taskList = document.getElementById('taskList');
+            taskList.innerHTML = tasks.map(task =>
+                `<div class="bg-gray-800 p-4 rounded border border-gray-700">
+                    <h3 class="font-bold">${task.title}</h3>
+                    <p class="text-sm text-gray-400">${task.description || '无描述'}</p>
+                    <small class="text-gray-500">优先级: ${task.priority} | 分类: ${task.category}</small>
+                </div>`
+            ).join('');
+        }
+    </script>
+</body>
+</html>
