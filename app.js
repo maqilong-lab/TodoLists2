@@ -370,23 +370,23 @@ function createTaskHTML(task) {
                                 <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">状态</div>
                                 <div class="flex flex-wrap gap-2">
                                     ${task.completed ? `
-                                        <div class="flex items-center text-green-400 text-xs md:text-sm bg-green-500 bg-opacity-10 rounded-lg px-3 py-1 md:px-4 md:py-2 border border-green-500 border-opacity-30">
-                                            <i class="fas fa-check-circle mr-1 md:mr-2"></i>
-                                            <span class="font-medium">已完成</span>
-                                        </div>
-                                    ` : `
-                                        <div class="flex items-center text-yellow-400 text-xs md:text-sm bg-yellow-500 bg-opacity-10 rounded-lg px-3 py-1 md:px-4 md:py-2 border border-yellow-500 border-opacity-30">
-                                            <i class="fas fa-clock mr-1 md:mr-2"></i>
-                                            <span class="font-medium">进行中</span>
-                                        </div>
-                                    `}
+                                                <div class="flex items-center text-green-400 text-xs md:text-sm bg-green-500 bg-opacity-10 rounded-lg px-3 py-1 md:px-4 md:py-2 border border-green-500 border-opacity-30">
+                                                    <i class="fas fa-check-circle mr-1 md:mr-2"></i>
+                                                    <span class="font-medium">已完成</span>
+                                                </div>
+                                            ` : `
+                                                <div class="flex items-center text-yellow-400 text-xs md:text-sm bg-yellow-500 bg-opacity-10 rounded-lg px-3 py-1 md:px-4 md:py-2 border border-yellow-500 border-opacity-30">
+                                                    <i class="fas fa-clock mr-1 md:mr-2"></i>
+                                                    <span class="font-medium">进行中</span>
+                                                </div>
+                                            `}
 
                                     ${isOverdueTask && !task.completed ? `
-                                        <div class="flex items-center text-red-400 text-xs md:text-sm bg-red-500 bg-opacity-10 rounded-lg px-3 py-1 md:px-4 md:py-2 border border-red-500 border-opacity-30 pulse-urgent">
-                                            <i class="fas fa-exclamation-triangle mr-1 md:mr-2 animate-pulse"></i>
-                                            <span class="font-medium">已逾期</span>
-                                        </div>
-                                    ` : ''}
+                                                <div class="flex items-center text-red-400 text-xs md:text-sm bg-red-500 bg-opacity-10 rounded-lg px-3 py-1 md:px-4 md:py-2 border border-red-500 border-opacity-30 pulse-urgent">
+                                                    <i class="fas fa-exclamation-triangle mr-1 md:mr-2 animate-pulse"></i>
+                                                    <span class="font-medium">已逾期</span>
+                                                </div>
+                                            ` : ''}
                                 </div>
                             </div>
                         </div>

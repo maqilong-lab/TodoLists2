@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调试测试</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cyber-purple': '#8b5cf6',
+                        'cyber-cyan': '#06b6d4',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-white p-8">
+    <h1 class="text-2xl mb-4">JavaScript功能测试</h1>
+
+    <div class="mb-4">
+        <input type="text" id="testInput" placeholder="测试输入" class="px-4 py-2 bg-gray-800 border border-gray-600 rounded text-white">
+        <button onclick="testFunction()" class="ml-2 px-4 py-2 bg-cyber-purple text-white rounded">测试按钮</button>
+    </div>
+
+    <div id="testResult" class="mt-4 p-4 bg-gray-800 rounded"></div>
+
+    <script>
+        function testFunction() {
+            const input = document.getElementById('testInput').value;
+            const result = document.getElementById('testResult');
+
+            try {
+                // 测试基本功能
+                console.log('测试基本功能...');
+                result.innerHTML = `<p class="text-green-400">基本功能正常 - 输入值: ${input}</p>`;
+
+                // 测试DOM操作
+                console.log('测试DOM操作...');
+                const testElement = document.createElement('div');
+                testElement.textContent = 'DOM操作测试';
+                testElement.className = 'text-cyan-400 mt-2';
+                result.appendChild(testElement);
+
+                // 测试数组操作
+                console.log('测试数组操作...');
+                const testArray = [];
+                testArray.push({id: 1, title: '测试任务'});
+                console.log('数组操作正常，长度:', testArray.length);
+
+                result.innerHTML += `<p class="text-green-400 mt-2">所有测试通过！JavaScript功能正常。</p>`;
+
+            } catch (error) {
+                console.error('测试出错:', error);
+                result.innerHTML = `<p class="text-red-400">测试失败: ${error.message}</p>`;
+            }
+        }
+
+        // 页面加载测试
+        console.log('页面加载完成，JavaScript正常运行');
+        document.getElementById('testResult').innerHTML = '<p class="text-blue-400">页面加载成功，JavaScript已初始化</p>';
+    </script>
+</body>
+</html>
