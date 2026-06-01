@@ -79,12 +79,12 @@
                 <!-- 添加任务表单 -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                     <input type="text" id="taskTitle" placeholder="输入任务标题..."
-                           class="neumorph-inset rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-neo-blue">
+                           class="neumorph-inset rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none">
                     <input type="text" id="taskDesc" placeholder="任务描述..."
-                           class="neumorph-inset rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-neo-blue">
+                           class="neumorph-inset rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none">
                     <div class="relative">
                         <input type="datetime-local" id="taskDueDate"
-                               class="neumorph-inset rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-neo-blue cursor-pointer w-full"
+                               class="neumorph-inset rounded-lg px-4 py-3 text-gray-700 focus:outline-none cursor-pointer w-full"
                                placeholder="选择截止时间"
                                onfocus="this.showPicker()">
                         <div class="absolute -bottom-12 left-0 right-0 flex gap-1 z-10 hidden" id="quickTimeButtons">
@@ -97,13 +97,13 @@
 
                 <!-- 任务属性选择 -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    <select id="taskPriority" class="neumorph-inset rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-neo-blue">
+                    <select id="taskPriority" class="neumorph-inset rounded-lg px-4 py-3 text-gray-700 focus:outline-none">
                         <option value="low">低优先级</option>
                         <option value="medium" selected>中优先级</option>
                         <option value="high">高优先级</option>
                     </select>
 
-                    <select id="taskCategory" class="neumorph-inset rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-neo-blue">
+                    <select id="taskCategory" class="neumorph-inset rounded-lg px-4 py-3 text-gray-700 focus:outline-none">
                         <option value="work">工作</option>
                         <option value="study">学习</option>
                         <option value="life">生活</option>
@@ -125,7 +125,7 @@
                 <!-- 搜索框 -->
                 <div class="relative">
                     <input type="text" id="searchInput" placeholder="搜索任务..."
-                           class="neumorph-inset w-full rounded-lg px-4 py-3 pl-12 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-neo-blue">
+                           class="neumorph-inset w-full rounded-lg px-4 py-3 pl-12 text-gray-700 placeholder-gray-400 focus:outline-none">
                     <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-neo-blue opacity-60"></i>
                 </div>
 
@@ -175,7 +175,7 @@
     </div>
 
     <!-- 确认删除模态框 -->
-    <div id="confirmModal" class="fixed inset-0 bg-gray-500 bg-opacity-20 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
+    <div id="confirmModal" class="fixed inset-0 bg-gray-500 bg-opacity-30 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
         <div class="neumorph rounded-xl p-6 md:p-8 max-w-md w-full">
             <h3 class="text-xl md:text-2xl font-bold text-neo-red mb-3 md:mb-4 text-center">确认删除</h3>
             <p class="text-gray-500 mb-4 md:mb-6 text-center text-sm md:text-base">确定要删除这个任务吗？此操作无法撤销。</p>
@@ -189,7 +189,7 @@
     </div>
 
     <!-- 清空已完成任务模态框 -->
-    <div id="clearModal" class="fixed inset-0 bg-gray-500 bg-opacity-20 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
+    <div id="clearModal" class="fixed inset-0 bg-gray-500 bg-opacity-30 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
         <div class="neumorph rounded-xl p-6 md:p-8 max-w-md w-full">
             <h3 class="text-xl md:text-2xl font-bold text-neo-orange mb-3 md:mb-4 text-center">清空已完成任务</h3>
             <p class="text-gray-500 mb-4 md:mb-6 text-center text-sm md:text-base">确定要删除所有已完成的任务吗？此操作无法撤销。</p>
@@ -203,7 +203,7 @@
     </div>
 
     <!-- 编辑任务模态框 -->
-    <div id="editModal" class="fixed inset-0 bg-gray-500 bg-opacity-20 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
+    <div id="editModal" class="fixed inset-0 bg-gray-500 bg-opacity-30 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
         <div class="neumorph rounded-xl p-4 md:p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
             <h3 class="text-xl md:text-2xl font-bold text-neo-blue mb-4 md:mb-6 text-center">编辑任务</h3>
             <form id="editForm" class="space-y-4">
@@ -211,21 +211,21 @@
                 <div>
                     <label class="block text-sm font-semibold text-gray-600 mb-2">任务标题 *</label>
                     <input type="text" id="editTaskTitle" required
-                           class="neumorph-inset w-full px-3 md:px-4 py-2 md:py-3 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-neo-blue">
+                           class="neumorph-inset w-full px-3 md:px-4 py-2 md:py-3 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-600 mb-2">任务描述</label>
                     <textarea id="editTaskDesc" rows="3"
-                              class="neumorph-inset w-full px-3 md:px-4 py-2 md:py-3 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-neo-blue resize-none"></textarea>
+                              class="neumorph-inset w-full px-3 md:px-4 py-2 md:py-3 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none resize-none"></textarea>
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-600 mb-2">截止日期</label>
                     <input type="datetime-local" id="editTaskDueDate"
-                           class="neumorph-inset w-full px-3 md:px-4 py-2 md:py-3 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-neo-blue">
+                           class="neumorph-inset w-full px-3 md:px-4 py-2 md:py-3 rounded-lg text-gray-700 focus:outline-none">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-600 mb-2">优先级</label>
-                    <select id="editTaskPriority" class="neumorph-inset w-full px-3 md:px-4 py-2 md:py-3 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-neo-blue">
+                    <select id="editTaskPriority" class="neumorph-inset w-full px-3 md:px-4 py-2 md:py-3 rounded-lg text-gray-700 focus:outline-none">
                         <option value="low">低优先级</option>
                         <option value="medium">中优先级</option>
                         <option value="high">高优先级</option>
@@ -233,7 +233,7 @@
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-600 mb-2">分类</label>
-                    <select id="editTaskCategory" class="neumorph-inset w-full px-3 md:px-4 py-2 md:py-3 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-neo-blue">
+                    <select id="editTaskCategory" class="neumorph-inset w-full px-3 md:px-4 py-2 md:py-3 rounded-lg text-gray-700 focus:outline-none">
                         <option value="work">工作</option>
                         <option value="study">学习</option>
                         <option value="life">生活</option>

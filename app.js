@@ -16,40 +16,15 @@ function showNotification(message, type = 'info') {
     // 创建提示元素
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 16px 24px;
-        border-radius: 12px;
-        color: white;
-        font-weight: 500;
-        z-index: 10000;
-        transform: translateX(400px);
-        transition: transform 0.3s ease-out;
-        box-shadow: 6px 6px 12px rgba(163,177,198,0.4), -4px -4px 10px rgba(255,255,255,0.6);
-        min-width: 200px;
-        max-width: 400px;
-    `;
 
-    // 根据类型设置样式
-    switch (type) {
-        case 'success':
-            notification.style.background = 'linear-gradient(135deg, #6b9e78, #7cad85)';
-            notification.innerHTML = `<i class="fas fa-check-circle mr-2"></i>${message}`;
-            break;
-        case 'error':
-            notification.style.background = 'linear-gradient(135deg, #c97b7b, #d48e8e)';
-            notification.innerHTML = `<i class="fas fa-exclamation-circle mr-2"></i>${message}`;
-            break;
-        case 'warning':
-            notification.style.background = 'linear-gradient(135deg, #d4a574, #ddb07f)';
-            notification.innerHTML = `<i class="fas fa-exclamation-triangle mr-2"></i>${message}`;
-            break;
-        default:
-            notification.style.background = 'linear-gradient(135deg, #9b8abf, #a898cc)';
-            notification.innerHTML = `<i class="fas fa-info-circle mr-2"></i>${message}`;
-    }
+    // 根据类型设置图标
+    const icons = {
+        success: 'fa-check-circle',
+        error: 'fa-exclamation-circle',
+        warning: 'fa-exclamation-triangle',
+        info: 'fa-info-circle'
+    };
+    notification.innerHTML = `<i class="fas ${icons[type] || icons.info} mr-2"></i>${message}`;
 
     document.body.appendChild(notification);
 
@@ -60,7 +35,7 @@ function showNotification(message, type = 'info') {
 
     // 自动隐藏
     setTimeout(() => {
-        notification.style.transform = 'translateX(400px)';
+        notification.style.transform = 'translateX(420px)';
         setTimeout(() => {
             if (notification.parentNode) {
                 notification.parentNode.removeChild(notification);
@@ -376,7 +351,7 @@ function createTaskHTML(task) {
             <div class="flex items-start justify-between">
                 <div class="flex items-start space-x-3 md:space-x-4 flex-1">
                     <button onclick="toggleTask(${task.id})"
-                            class="w-6 h-6 md:w-8 md:h-8 rounded-full border-2 ${task.completed ? 'bg-neo-green border-neo-green' : 'border-gray-400'} flex items-center justify-center transition-all duration-300 hover:scale-110 mt-0.5 md:mt-1 flex-shrink-0 shadow-[2px_2px_4px_rgba(163,177,198,0.4),-1px_-1px_3px_rgba(255,255,255,0.8)]">
+                            class="neo-checkbox w-6 h-6 md:w-8 md:h-8 mt-0.5 md:mt-1 flex-shrink-0 ${task.completed ? 'checked' : ''}">
                         ${task.completed ? '<i class="fas fa-check text-white text-xs md:text-sm"></i>' : ''}
                     </button>
 
@@ -391,10 +366,10 @@ function createTaskHTML(task) {
                             <div class="space-y-2">
                                 <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">分类 & 优先级</div>
                                 <div class="flex flex-wrap gap-2">
-                                    <span class="category-${task.category} px-3 py-1 md:px-4 md:py-2 rounded-lg text-white text-xs md:text-sm font-medium uppercase tracking-wider inline-flex items-center shadow-sm">
+                                    <span class="category-${task.category} px-3 py-1 md:px-4 md:py-2 rounded-lg text-white text-xs md:text-sm font-medium uppercase tracking-wider inline-flex items-center">
                                         <i class="fas ${getCategoryIcon(task.category)} mr-1 md:mr-2"></i>${getCategoryName(task.category)}
                                     </span>
-                                    <span class="priority-${task.priority} px-3 py-1 md:px-4 md:py-2 rounded-lg text-white text-xs md:text-sm font-medium uppercase tracking-wider inline-flex items-center shadow-sm">
+                                    <span class="priority-${task.priority} px-3 py-1 md:px-4 md:py-2 rounded-lg text-white text-xs md:text-sm font-medium uppercase tracking-wider inline-flex items-center">
                                         <i class="fas ${getPriorityIcon(task.priority)} mr-1 md:mr-2"></i>${getPriorityName(task.priority)}
                                     </span>
                                 </div>
@@ -428,7 +403,7 @@ function createTaskHTML(task) {
                                         <i class="fas fa-stopwatch mr-2 md:mr-3 ${getCountdownIconStyle(task.dueDate, isOverdueTask)} text-sm md:text-lg flex-shrink-0"></i>
                                         <div class="flex-1 min-w-0">
                                             <div class="text-xs text-gray-400 mb-0.5">剩余时间</div>
-                                            <div class="font-mono font-bold ${getCountdownTextStyle(task.dueDate, isOverdueTask)} truncate">
+                                            <div class="font-mono font-bold ${getCountdownTextStyle(task.dueDate, isOverdueTask)} countdown-display truncate">
                                                 ${countdown}
                                             </div>
                                         </div>
@@ -658,7 +633,12 @@ function updateCountdowns() {
                 const isOverdueTask = isOverdue(task);
 
                 el.textContent = countdown;
-                el.className = `${getCountdownTextStyle(task.dueDate, isOverdueTask)} countdown-display`;
+                // 保留基础类名，只更新文本样式类
+                const baseClasses = el.className
+                    .replace(/text-neo-(blue|red|orange)\s*/g, '')
+                    .replace(/font-(bold|semibold)\s*/g, '')
+                    .trim();
+                el.className = `${baseClasses} ${getCountdownTextStyle(task.dueDate, isOverdueTask)} countdown-display`;
 
                 // 更新图标
                 const icon = el.parentElement.querySelector('i');

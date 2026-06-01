@@ -11,127 +11,243 @@ body {
     overflow-x: hidden;
 }
 
-/* ===== Neumorphic Panel ===== */
+/* ===== Neumorphic Panel (raised) ===== */
 .neumorph {
     background: #e0e5ec;
     border-radius: 16px;
-    box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6),
-                -9px -9px 16px rgba(255, 255, 255, 0.5);
+    box-shadow:
+        12px 12px 24px rgba(163, 177, 198, 0.5),
+        -12px -12px 24px rgba(255, 255, 255, 0.5),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .neumorph-hover {
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .neumorph-hover:hover {
-    box-shadow: 6px 6px 12px rgba(163, 177, 198, 0.7),
-                -6px -6px 12px rgba(255, 255, 255, 0.6);
+    box-shadow:
+        8px 8px 16px rgba(163, 177, 198, 0.6),
+        -8px -8px 16px rgba(255, 255, 255, 0.6),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.8);
+    transform: translateY(-2px);
 }
 
-/* ===== Neumorphic Inset (for inputs) ===== */
+/* ===== Neumorphic Inset (for inputs, pressed states) ===== */
 .neumorph-inset {
     background: #e0e5ec;
     border-radius: 12px;
-    box-shadow: inset 4px 4px 8px rgba(163, 177, 198, 0.4),
-                inset -4px -4px 8px rgba(255, 255, 255, 0.5);
+    box-shadow:
+        inset 6px 6px 14px rgba(163, 177, 198, 0.45),
+        inset -6px -6px 14px rgba(255, 255, 255, 0.55);
     border: none;
+    transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.neumorph-inset:focus {
+    box-shadow:
+        inset 8px 8px 18px rgba(163, 177, 198, 0.5),
+        inset -8px -8px 18px rgba(255, 255, 255, 0.6);
+    background: #dde2ea;
 }
 
 /* ===== Neumorphic Button ===== */
 .neumorph-btn {
     background: #e0e5ec;
     border-radius: 12px;
-    box-shadow: 5px 5px 10px rgba(163, 177, 198, 0.5),
-                -5px -5px 10px rgba(255, 255, 255, 0.5);
-    transition: all 0.2s ease;
+    box-shadow:
+        6px 6px 14px rgba(163, 177, 198, 0.5),
+        -6px -6px 14px rgba(255, 255, 255, 0.5),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.6);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     border: none;
+    position: relative;
 }
 
 .neumorph-btn:hover {
-    box-shadow: 3px 3px 6px rgba(163, 177, 198, 0.6),
-                -3px -3px 6px rgba(255, 255, 255, 0.6);
+    box-shadow:
+        4px 4px 10px rgba(163, 177, 198, 0.6),
+        -4px -4px 10px rgba(255, 255, 255, 0.6),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.6);
+    transform: translateY(-1px);
 }
 
 .neumorph-btn:active {
-    box-shadow: inset 3px 3px 6px rgba(163, 177, 198, 0.5),
-                inset -3px -3px 6px rgba(255, 255, 255, 0.5);
+    box-shadow:
+        inset 5px 5px 12px rgba(163, 177, 198, 0.5),
+        inset -5px -5px 12px rgba(255, 255, 255, 0.5);
+    transform: scale(0.97);
 }
 
-/* ===== Priority indicators (soft left border, no glow) ===== */
+/* ===== Neumorphic Checkbox ===== */
+.neo-checkbox {
+    background: #e0e5ec;
+    border-radius: 50%;
+    box-shadow:
+        4px 4px 10px rgba(163, 177, 198, 0.5),
+        -4px -4px 10px rgba(255, 255, 255, 0.5),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.7);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.neo-checkbox:hover {
+    box-shadow:
+        3px 3px 8px rgba(163, 177, 198, 0.6),
+        -3px -3px 8px rgba(255, 255, 255, 0.6);
+    transform: scale(1.1);
+}
+
+.neo-checkbox:active {
+    box-shadow:
+        inset 3px 3px 8px rgba(163, 177, 198, 0.4),
+        inset -3px -3px 8px rgba(255, 255, 255, 0.5);
+    transform: scale(0.92);
+}
+
+.neo-checkbox.checked {
+    box-shadow:
+        inset 3px 3px 8px rgba(163, 177, 198, 0.4),
+        inset -3px -3px 8px rgba(255, 255, 255, 0.5);
+    background: #6b9e78;
+}
+
+/* ===== Priority indicators (solid badges with neumorphic depth) ===== */
 .priority-high {
-    border-left: 4px solid #c97b7b;
+    background: #c97b7b;
+    box-shadow:
+        2px 2px 6px rgba(163, 177, 198, 0.4),
+        -2px -2px 6px rgba(255, 255, 255, 0.4),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .priority-medium {
-    border-left: 4px solid #9b8abf;
+    background: #9b8abf;
+    box-shadow:
+        2px 2px 6px rgba(163, 177, 198, 0.4),
+        -2px -2px 6px rgba(255, 255, 255, 0.4),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .priority-low {
-    border-left: 4px solid #7c9cbf;
+    background: #7c9cbf;
+    box-shadow:
+        2px 2px 6px rgba(163, 177, 198, 0.4),
+        -2px -2px 6px rgba(255, 255, 255, 0.4),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.25);
 }
 
-/* ===== Category badges (soft pastel, no neon gradients) ===== */
+/* ===== Category badges (soft neumorphic, no harsh gradients) ===== */
 .category-work {
-    background: linear-gradient(135deg, #9b8abf, #8a78ae);
+    background: #9b8abf;
     color: #fff;
+    box-shadow:
+        2px 2px 6px rgba(163, 177, 198, 0.4),
+        -2px -2px 6px rgba(255, 255, 255, 0.4),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.25);
 }
 .category-study {
-    background: linear-gradient(135deg, #7c9cbf, #6a8aa8);
+    background: #7c9cbf;
     color: #fff;
+    box-shadow:
+        2px 2px 6px rgba(163, 177, 198, 0.4),
+        -2px -2px 6px rgba(255, 255, 255, 0.4),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.25);
 }
 .category-life {
-    background: linear-gradient(135deg, #c9a0b0, #b48e9e);
+    background: #c9a0b0;
     color: #fff;
+    box-shadow:
+        2px 2px 6px rgba(163, 177, 198, 0.4),
+        -2px -2px 6px rgba(255, 255, 255, 0.4),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.25);
 }
 .category-personal {
-    background: linear-gradient(135deg, #6b9e78, #5a8c67);
+    background: #6b9e78;
     color: #fff;
+    box-shadow:
+        2px 2px 6px rgba(163, 177, 198, 0.4),
+        -2px -2px 6px rgba(255, 255, 255, 0.4),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.25);
 }
 .category-other {
-    background: linear-gradient(135deg, #d4a574, #c09362);
+    background: #d4a574;
     color: #fff;
+    box-shadow:
+        2px 2px 6px rgba(163, 177, 198, 0.4),
+        -2px -2px 6px rgba(255, 255, 255, 0.4),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 /* ===== Neumorphic Task Card ===== */
 .neumorph-task {
     background: #e0e5ec;
-    box-shadow: 6px 6px 12px rgba(163, 177, 198, 0.5),
-                -6px -6px 12px rgba(255, 255, 255, 0.5);
-    transition: all 0.3s ease;
+    box-shadow:
+        8px 8px 18px rgba(163, 177, 198, 0.5),
+        -8px -8px 18px rgba(255, 255, 255, 0.5),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.8);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .neumorph-task:hover {
-    box-shadow: 4px 4px 8px rgba(163, 177, 198, 0.6),
-                -4px -4px 8px rgba(255, 255, 255, 0.6);
+    box-shadow:
+        6px 6px 14px rgba(163, 177, 198, 0.55),
+        -6px -6px 14px rgba(255, 255, 255, 0.55),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.8);
+    transform: translateY(-2px);
 }
 
 /* ===== Neumorphic Icon Button ===== */
 .neo-icon-btn {
     background: #e0e5ec;
     border-radius: 10px;
-    box-shadow: 3px 3px 6px rgba(163, 177, 198, 0.4),
-                -3px -3px 6px rgba(255, 255, 255, 0.5);
-    transition: all 0.2s ease;
+    box-shadow:
+        4px 4px 10px rgba(163, 177, 198, 0.45),
+        -4px -4px 10px rgba(255, 255, 255, 0.5),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.6);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     border: none;
 }
 
 .neo-icon-btn:hover {
-    box-shadow: 2px 2px 4px rgba(163, 177, 198, 0.5),
-                -2px -2px 4px rgba(255, 255, 255, 0.6);
+    box-shadow:
+        3px 3px 8px rgba(163, 177, 198, 0.55),
+        -3px -3px 8px rgba(255, 255, 255, 0.6),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.6);
+    transform: translateY(-1px);
 }
 
 .neo-icon-btn:active {
-    box-shadow: inset 2px 2px 4px rgba(163, 177, 198, 0.4),
-                inset -2px -2px 4px rgba(255, 255, 255, 0.5);
+    box-shadow:
+        inset 3px 3px 8px rgba(163, 177, 198, 0.45),
+        inset -3px -3px 8px rgba(255, 255, 255, 0.5);
+    transform: scale(0.92);
 }
 
 /* ===== Filter button active state ===== */
 .filter-btn.active {
-    box-shadow: inset 3px 3px 6px rgba(163, 177, 198, 0.5),
-                inset -3px -3px 6px rgba(255, 255, 255, 0.5);
+    box-shadow:
+        inset 4px 4px 10px rgba(163, 177, 198, 0.55),
+        inset -4px -4px 10px rgba(255, 255, 255, 0.6);
     font-weight: 700;
+    background: #dbe0e8;
+}
+
+.filter-btn {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.filter-btn:active {
+    box-shadow:
+        inset 4px 4px 10px rgba(163, 177, 198, 0.55),
+        inset -4px -4px 10px rgba(255, 255, 255, 0.6);
+    transform: scale(0.96);
 }
 
 /* ===== Animations ===== */
@@ -192,22 +308,24 @@ body {
 
 /* ===== Scrollbar ===== */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 
 ::-webkit-scrollbar-track {
     background: #e0e5ec;
-    border-radius: 4px;
+    border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #c0c8d4, #d0d6e0);
-    border-radius: 4px;
-    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(180deg, #c5ccd8, #d0d6e0);
+    border-radius: 3px;
+    box-shadow:
+        inset 1px 1px 2px rgba(255, 255, 255, 0.5),
+        inset -1px -1px 2px rgba(0, 0, 0, 0.05);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #b0b8c4, #c0c8d4);
+    background: linear-gradient(180deg, #b8bfcb, #c5ccd8);
 }
 
 /* ===== Datetime input ===== */
@@ -268,29 +386,45 @@ input[type="datetime-local"].has-value::-webkit-datetime-edit {
     top: 20px;
     right: 20px;
     padding: 16px 24px;
-    border-radius: 12px;
+    border-radius: 14px;
     color: #fff;
     font-weight: 600;
     z-index: 10000;
-    transform: translateX(400px);
-    transition: transform 0.3s ease-out;
+    transform: translateX(420px);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     min-width: 200px;
     max-width: 400px;
     border: none;
 }
 
 .notification-success {
-    background: linear-gradient(135deg, #6b9e78, #7cad85);
+    background: #6b9e78;
+    box-shadow:
+        6px 6px 14px rgba(163, 177, 198, 0.4),
+        -4px -4px 10px rgba(255, 255, 255, 0.5),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .notification-error {
-    background: linear-gradient(135deg, #c97b7b, #d48e8e);
+    background: #c97b7b;
+    box-shadow:
+        6px 6px 14px rgba(163, 177, 198, 0.4),
+        -4px -4px 10px rgba(255, 255, 255, 0.5),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .notification-warning {
-    background: linear-gradient(135deg, #d4a574, #ddb07f);
+    background: #d4a574;
+    box-shadow:
+        6px 6px 14px rgba(163, 177, 198, 0.4),
+        -4px -4px 10px rgba(255, 255, 255, 0.5),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .notification-info {
-    background: linear-gradient(135deg, #9b8abf, #a898cc);
+    background: #9b8abf;
+    box-shadow:
+        6px 6px 14px rgba(163, 177, 198, 0.4),
+        -4px -4px 10px rgba(255, 255, 255, 0.5),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.25);
 }
