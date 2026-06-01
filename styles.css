@@ -1,140 +1,140 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
 
 * {
-    font-family: 'Orbitron', 'Arial', sans-serif;
-    letter-spacing: 0.05em;
+    font-family: 'Nunito', 'Segoe UI', 'Arial', sans-serif;
+    letter-spacing: 0;
 }
 
 body {
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a0b2e 50%, #0a0a0a 100%);
+    background: #e0e5ec;
     min-height: 100vh;
     overflow-x: hidden;
 }
 
-/* 背景粒子效果 */
-.particle-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: -1;
+/* ===== Neumorphic Panel ===== */
+.neumorph {
+    background: #e0e5ec;
+    border-radius: 16px;
+    box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6),
+                -9px -9px 16px rgba(255, 255, 255, 0.5);
 }
 
-.particle {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: linear-gradient(45deg, #8b5cf6, #06b6d4, #ec4899);
-    border-radius: 50%;
-    animation: float 20s infinite linear;
-    opacity: 0.6;
+.neumorph-hover {
+    transition: all 0.3s ease;
 }
 
-@keyframes float {
-    0% { transform: translateY(100vh) translateX(0px); }
-    100% { transform: translateY(-100px) translateX(100px); }
+.neumorph-hover:hover {
+    box-shadow: 6px 6px 12px rgba(163, 177, 198, 0.7),
+                -6px -6px 12px rgba(255, 255, 255, 0.6);
 }
 
-/* 玻璃拟态效果 */
-.glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+/* ===== Neumorphic Inset (for inputs) ===== */
+.neumorph-inset {
+    background: #e0e5ec;
+    border-radius: 12px;
+    box-shadow: inset 4px 4px 8px rgba(163, 177, 198, 0.4),
+                inset -4px -4px 8px rgba(255, 255, 255, 0.5);
+    border: none;
 }
 
-.glass-hover {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+/* ===== Neumorphic Button ===== */
+.neumorph-btn {
+    background: #e0e5ec;
+    border-radius: 12px;
+    box-shadow: 5px 5px 10px rgba(163, 177, 198, 0.5),
+                -5px -5px 10px rgba(255, 255, 255, 0.5);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
 }
 
-.glass-hover:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-    border-color: rgba(139, 92, 246, 0.5);
+.neumorph-btn:hover {
+    box-shadow: 3px 3px 6px rgba(163, 177, 198, 0.6),
+                -3px -3px 6px rgba(255, 255, 255, 0.6);
 }
 
-/* 霓虹边框效果 */
-.neon-border-purple {
-    border: 1px solid #8b5cf6;
-    box-shadow: 0 0 10px rgba(139, 92, 246, 0.5), inset 0 0 10px rgba(139, 92, 246, 0.1);
+.neumorph-btn:active {
+    box-shadow: inset 3px 3px 6px rgba(163, 177, 198, 0.5),
+                inset -3px -3px 6px rgba(255, 255, 255, 0.5);
 }
 
-.neon-border-cyan {
-    border: 1px solid #06b6d4;
-    box-shadow: 0 0 10px rgba(6, 182, 212, 0.5), inset 0 0 10px rgba(6, 182, 212, 0.1);
-}
-
-.neon-border-pink {
-    border: 1px solid #ec4899;
-    box-shadow: 0 0 10px rgba(236, 72, 153, 0.5), inset 0 0 10px rgba(236, 72, 153, 0.1);
-}
-
-.neon-border-red {
-    border: 1px solid #ef4444;
-    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5), inset 0 0 10px rgba(239, 68, 68, 0.1);
-}
-
-/* 优先级颜色 */
+/* ===== Priority indicators (soft left border, no glow) ===== */
 .priority-high {
-    border-left: 4px solid #ef4444;
-    box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+    border-left: 4px solid #c97b7b;
 }
 
 .priority-medium {
-    border-left: 4px solid #8b5cf6;
-    box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+    border-left: 4px solid #9b8abf;
 }
 
 .priority-low {
-    border-left: 4px solid #06b6d4;
-    box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+    border-left: 4px solid #7c9cbf;
 }
 
-/* 分类标签颜色 */
-.category-work { background: linear-gradient(45deg, #8b5cf6, #a855f7); }
-.category-study { background: linear-gradient(45deg, #06b6d4, #0891b2); }
-.category-life { background: linear-gradient(45deg, #ec4899, #db2777); }
-.category-personal { background: linear-gradient(45deg, #10b981, #059669); }
-.category-other { background: linear-gradient(45deg, #f59e0b, #d97706); }
-
-/* 动画效果 */
-@keyframes pulse-neon {
-    0%, 100% { box-shadow: 0 0 5px currentColor; }
-    50% { box-shadow: 0 0 20px currentColor, 0 0 40px currentColor; }
+/* ===== Category badges (soft pastel, no neon gradients) ===== */
+.category-work {
+    background: linear-gradient(135deg, #9b8abf, #8a78ae);
+    color: #fff;
+}
+.category-study {
+    background: linear-gradient(135deg, #7c9cbf, #6a8aa8);
+    color: #fff;
+}
+.category-life {
+    background: linear-gradient(135deg, #c9a0b0, #b48e9e);
+    color: #fff;
+}
+.category-personal {
+    background: linear-gradient(135deg, #6b9e78, #5a8c67);
+    color: #fff;
+}
+.category-other {
+    background: linear-gradient(135deg, #d4a574, #c09362);
+    color: #fff;
 }
 
-@keyframes pulse-urgent {
-    0%, 100% {
-        box-shadow: 0 0 10px #ef4444, 0 0 20px #ef4444;
-        transform: scale(1);
-    }
-    50% {
-        box-shadow: 0 0 20px #ef4444, 0 0 40px #ef4444, 0 0 60px #ef4444;
-        transform: scale(1.05);
-    }
+/* ===== Neumorphic Task Card ===== */
+.neumorph-task {
+    background: #e0e5ec;
+    box-shadow: 6px 6px 12px rgba(163, 177, 198, 0.5),
+                -6px -6px 12px rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
 }
 
-@keyframes countdown-tick {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
+.neumorph-task:hover {
+    box-shadow: 4px 4px 8px rgba(163, 177, 198, 0.6),
+                -4px -4px 8px rgba(255, 255, 255, 0.6);
 }
 
-.pulse-neon {
-    animation: pulse-neon 2s infinite;
+/* ===== Neumorphic Icon Button ===== */
+.neo-icon-btn {
+    background: #e0e5ec;
+    border-radius: 10px;
+    box-shadow: 3px 3px 6px rgba(163, 177, 198, 0.4),
+                -3px -3px 6px rgba(255, 255, 255, 0.5);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
 }
 
-.pulse-urgent {
-    animation: pulse-urgent 1s infinite;
+.neo-icon-btn:hover {
+    box-shadow: 2px 2px 4px rgba(163, 177, 198, 0.5),
+                -2px -2px 4px rgba(255, 255, 255, 0.6);
 }
 
-.countdown-display {
-    animation: countdown-tick 1s infinite;
-    font-weight: bold;
-    font-size: 0.875rem;
+.neo-icon-btn:active {
+    box-shadow: inset 2px 2px 4px rgba(163, 177, 198, 0.4),
+                inset -2px -2px 4px rgba(255, 255, 255, 0.5);
 }
 
+/* ===== Filter button active state ===== */
+.filter-btn.active {
+    box-shadow: inset 3px 3px 6px rgba(163, 177, 198, 0.5),
+                inset -3px -3px 6px rgba(255, 255, 255, 0.5);
+    font-weight: 700;
+}
+
+/* ===== Animations ===== */
 @keyframes slide-in {
     from {
         transform: translateY(-20px);
@@ -150,123 +150,70 @@ body {
     animation: slide-in 0.5s ease-out;
 }
 
-@keyframes scan-line {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-
-.scan-line {
-    position: relative;
-    overflow: hidden;
-}
-
-.scan-line::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #8b5cf6, transparent);
-    animation: scan-line 2s infinite;
-}
-
-/* 完成动画 */
-@keyframes complete-task {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
 @keyframes task-success {
     0% {
         transform: scale(1) rotate(0deg);
-        box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
     }
     25% {
-        transform: scale(1.1) rotate(2deg);
-        box-shadow: 0 0 20px rgba(34, 197, 94, 0.8);
+        transform: scale(1.05) rotate(1deg);
     }
     50% {
-        transform: scale(1.05) rotate(-1deg);
-        box-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
+        transform: scale(1.02) rotate(-0.5deg);
     }
     100% {
         transform: scale(1) rotate(0deg);
-        box-shadow: 0 0 5px rgba(34, 197, 94, 0.3);
-    }
-}
-
-@keyframes scan-complete {
-    0% { transform: translateX(-100%); opacity: 0; }
-    50% { opacity: 1; }
-    100% { transform: translateX(100%); opacity: 0; }
-}
-
-@keyframes particle-burst {
-    0% {
-        transform: translate(0, 0) scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(var(--tx), var(--ty)) scale(0);
-        opacity: 0;
     }
 }
 
 .task-complete {
-    animation: task-success 0.8s ease-out;
+    animation: task-success 0.6s ease-out;
 }
 
-.scan-complete {
-    position: relative;
-    overflow: hidden;
+@keyframes countdown-tick {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
 }
 
-.scan-complete::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.3), transparent);
-    animation: scan-complete 1s ease-out;
+.countdown-display {
+    animation: countdown-tick 1s infinite;
+    font-weight: bold;
+    font-size: 0.875rem;
 }
 
-/* 响应式设计 */
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
     .mobile-stack {
         flex-direction: column;
     }
-
     .mobile-full {
         width: 100%;
     }
 }
 
-/* 滚动条样式 */
+/* ===== Scrollbar ===== */
 ::-webkit-scrollbar {
     width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(45deg, #8b5cf6, #06b6d4);
+    background: #e0e5ec;
     border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(45deg, #06b6d4, #ec4899);
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #c0c8d4, #d0d6e0);
+    border-radius: 4px;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* 日期时间选择器样式 */
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #b0b8c4, #c0c8d4);
+}
+
+/* ===== Datetime input ===== */
 input[type="datetime-local"] {
     position: relative;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23ec4899' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%237c9cbf' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 16px;
@@ -274,26 +221,24 @@ input[type="datetime-local"] {
 }
 
 input[type="datetime-local"]::-webkit-calendar-picker-indicator {
-    filter: invert(1) sepia(1) saturate(5) hue-rotate(250deg);
+    filter: opacity(0.5);
     cursor: pointer;
 }
 
 input[type="datetime-local"]:focus::-webkit-calendar-picker-indicator,
 input[type="datetime-local"]:hover::-webkit-calendar-picker-indicator {
-    filter: invert(1) sepia(1) saturate(10) hue-rotate(280deg);
+    filter: opacity(0.8);
 }
 
-/* 占位符样式 */
 input[type="datetime-local"]:invalid::-webkit-datetime-edit {
     color: #9ca3af;
 }
 
 input[type="datetime-local"].has-value::-webkit-datetime-edit {
-    color: white;
+    color: #374151;
     font-weight: 500;
 }
 
-/* 移动端优化 */
 @media (max-width: 768px) {
     input[type="datetime-local"] {
         font-size: 14px;
@@ -301,7 +246,7 @@ input[type="datetime-local"].has-value::-webkit-datetime-edit {
     }
 }
 
-/* 快速时间选择按钮动画 */
+/* ===== Quick time buttons ===== */
 #quickTimeButtons {
     animation: slideUp 0.3s ease-out;
 }
@@ -317,37 +262,35 @@ input[type="datetime-local"].has-value::-webkit-datetime-edit {
     }
 }
 
-/* 通知提示系统 */
+/* ===== Notification system ===== */
 .notification {
     position: fixed;
     top: 20px;
     right: 20px;
     padding: 16px 24px;
-    border-radius: 8px;
-    color: white;
-    font-weight: 500;
+    border-radius: 12px;
+    color: #fff;
+    font-weight: 600;
     z-index: 10000;
     transform: translateX(400px);
     transition: transform 0.3s ease-out;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     min-width: 200px;
     max-width: 400px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: none;
 }
 
 .notification-success {
-    background: linear-gradient(45deg, #22c55e, #10b981);
+    background: linear-gradient(135deg, #6b9e78, #7cad85);
 }
 
 .notification-error {
-    background: linear-gradient(45deg, #ef4444, #dc2626);
+    background: linear-gradient(135deg, #c97b7b, #d48e8e);
 }
 
 .notification-warning {
-    background: linear-gradient(45deg, #f59e0b, #d97706);
+    background: linear-gradient(135deg, #d4a574, #ddb07f);
 }
 
 .notification-info {
-    background: linear-gradient(45deg, #8b5cf6, #7c3aed);
+    background: linear-gradient(135deg, #9b8abf, #a898cc);
 }

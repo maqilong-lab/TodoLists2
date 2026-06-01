@@ -17,18 +17,14 @@
             theme: {
                 extend: {
                     colors: {
-                        'cyber-dark': '#0a0a0a',
-                        'cyber-purple': '#8b5cf6',
-                        'cyber-cyan': '#06b6d4',
-                        'cyber-pink': '#ec4899',
-                        'cyber-red': '#ef4444',
-                        'glass': 'rgba(255, 255, 255, 0.1)',
-                    },
-                    boxShadow: {
-                        'neon-purple': '0 0 5px #8b5cf6, 0 0 20px #8b5cf6, 0 0 40px #8b5cf6',
-                        'neon-cyan': '0 0 5px #06b6d4, 0 0 20px #06b6d4, 0 0 40px #06b6d4',
-                        'neon-pink': '0 0 5px #ec4899, 0 0 20px #ec4899, 0 0 40px #ec4899',
-                        'neon-red': '0 0 5px #ef4444, 0 0 20px #ef4444, 0 0 40px #ef4444',
+                        'neo-bg': '#e0e5ec',
+                        'neo-light': '#ffffff',
+                        'neo-dark': '#a3b1c6',
+                        'neo-blue': '#7c9cbf',
+                        'neo-green': '#6b9e78',
+                        'neo-orange': '#d4a574',
+                        'neo-red': '#c97b7b',
+                        'neo-purple': '#9b8abf',
                     }
                 }
             }
@@ -44,72 +40,70 @@
     <!-- Custom Styles -->
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="text-white relative">
-    <!-- 背景粒子 -->
-    <div class="particle-bg" id="particles"></div>
+<body class="text-gray-700">
 
     <!-- 主容器 -->
     <div class="container mx-auto px-4 py-8 max-w-6xl relative z-10">
         <!-- 头部 -->
         <header class="text-center mb-8 md:mb-12 slide-in">
-            <h1 class="text-3xl md:text-5xl lg:text-7xl font-black mb-2 md:mb-4 bg-gradient-to-r from-purple-400 via-cyan-400 to-pink-400 bg-clip-text text-transparent">
+            <h1 class="text-3xl md:text-5xl lg:text-7xl font-black mb-2 md:mb-4 text-neo-purple">
                 NEXUS • TASK 3.0
             </h1>
-            <p class="text-cyan-300 text-sm md:text-lg tracking-wider uppercase">智能任务管理系统 - 支持任务编辑</p>
-            <div class="w-24 md:w-32 h-1 bg-gradient-to-r from-purple-500 to-cyan-500 mx-auto mt-2 md:mt-4 rounded-full"></div>
+            <p class="text-neo-blue text-sm md:text-lg font-semibold">智能任务管理系统 - 支持任务编辑</p>
+            <div class="w-24 md:w-32 h-1 bg-neo-blue mx-auto mt-2 md:mt-4 rounded-full opacity-60"></div>
         </header>
 
         <!-- 统计仪表盘 -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div class="glass glass-hover rounded-xl p-4 text-center neon-border-purple">
-                <div class="text-2xl md:text-3xl font-bold text-purple-400 mb-1" id="totalTasks">0</div>
-                <div class="text-xs md:text-sm text-gray-300 uppercase tracking-wider">总任务</div>
+            <div class="neumorph neumorph-hover rounded-xl p-4 text-center">
+                <div class="text-2xl md:text-3xl font-bold text-neo-purple mb-1" id="totalTasks">0</div>
+                <div class="text-xs md:text-sm text-gray-500 font-semibold">总任务</div>
             </div>
-            <div class="glass glass-hover rounded-xl p-4 text-center neon-border-cyan">
-                <div class="text-2xl md:text-3xl font-bold text-cyan-400 mb-1" id="completedTasks">0</div>
-                <div class="text-xs md:text-sm text-gray-300 uppercase tracking-wider">已完成</div>
+            <div class="neumorph neumorph-hover rounded-xl p-4 text-center">
+                <div class="text-2xl md:text-3xl font-bold text-neo-green mb-1" id="completedTasks">0</div>
+                <div class="text-xs md:text-sm text-gray-500 font-semibold">已完成</div>
             </div>
-            <div class="glass glass-hover rounded-xl p-4 text-center neon-border-pink">
-                <div class="text-2xl md:text-3xl font-bold text-pink-400 mb-1" id="pendingTasks">0</div>
-                <div class="text-xs md:text-sm text-gray-300 uppercase tracking-wider">待完成</div>
+            <div class="neumorph neumorph-hover rounded-xl p-4 text-center">
+                <div class="text-2xl md:text-3xl font-bold text-neo-blue mb-1" id="pendingTasks">0</div>
+                <div class="text-xs md:text-sm text-gray-500 font-semibold">待完成</div>
             </div>
-            <div class="glass glass-hover rounded-xl p-4 text-center neon-border-red">
-                <div class="text-2xl md:text-3xl font-bold text-red-400 mb-1" id="overdueTasks">0</div>
-                <div class="text-xs md:text-sm text-gray-300 uppercase tracking-wider">已逾期</div>
+            <div class="neumorph neumorph-hover rounded-xl p-4 text-center">
+                <div class="text-2xl md:text-3xl font-bold text-neo-red mb-1" id="overdueTasks">0</div>
+                <div class="text-xs md:text-sm text-gray-500 font-semibold">已逾期</div>
             </div>
         </div>
 
         <!-- 控制面板 -->
-        <div class="glass rounded-xl p-6 mb-8 neon-border-purple">
+        <div class="neumorph rounded-xl p-6 mb-8">
             <div class="space-y-4">
                 <!-- 添加任务表单 -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                     <input type="text" id="taskTitle" placeholder="输入任务标题..."
-                           class="bg-black bg-opacity-30 border border-purple-500 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                           class="neumorph-inset rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-neo-blue">
                     <input type="text" id="taskDesc" placeholder="任务描述..."
-                           class="bg-black bg-opacity-30 border border-cyan-500 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
+                           class="neumorph-inset rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-neo-blue">
                     <div class="relative">
                         <input type="datetime-local" id="taskDueDate"
-                               class="bg-black bg-opacity-30 border border-pink-500 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent cursor-pointer hover:bg-black hover:bg-opacity-40 transition-all duration-300 w-full"
+                               class="neumorph-inset rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-neo-blue cursor-pointer w-full"
                                placeholder="选择截止时间"
                                onfocus="this.showPicker()">
                         <div class="absolute -bottom-12 left-0 right-0 flex gap-1 z-10 hidden" id="quickTimeButtons">
-                            <button type="button" onclick="setQuickTime(1)" class="px-2 py-1 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white text-xs rounded transition-all duration-300 transform hover:scale-105">1小时后</button>
-                            <button type="button" onclick="setQuickTime(6)" class="px-2 py-1 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white text-xs rounded transition-all duration-300 transform hover:scale-105">6小时后</button>
-                            <button type="button" onclick="setQuickTime(24)" class="px-2 py-1 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white text-xs rounded transition-all duration-300 transform hover:scale-105">明天</button>
+                            <button type="button" onclick="setQuickTime(1)" class="neumorph-btn px-2 py-1 text-neo-blue text-xs rounded font-semibold">1小时后</button>
+                            <button type="button" onclick="setQuickTime(6)" class="neumorph-btn px-2 py-1 text-neo-blue text-xs rounded font-semibold">6小时后</button>
+                            <button type="button" onclick="setQuickTime(24)" class="neumorph-btn px-2 py-1 text-neo-blue text-xs rounded font-semibold">明天</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- 任务属性选择 -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    <select id="taskPriority" class="bg-black bg-opacity-30 border border-purple-500 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <select id="taskPriority" class="neumorph-inset rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-neo-blue">
                         <option value="low">低优先级</option>
                         <option value="medium" selected>中优先级</option>
                         <option value="high">高优先级</option>
                     </select>
 
-                    <select id="taskCategory" class="bg-black bg-opacity-30 border border-cyan-500 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500">
+                    <select id="taskCategory" class="neumorph-inset rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-neo-blue">
                         <option value="work">工作</option>
                         <option value="study">学习</option>
                         <option value="life">生活</option>
@@ -118,7 +112,7 @@
                     </select>
 
                     <button type="button" onclick="addTask()"
-                            class="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white px-6 py-3 rounded-lg font-semibold uppercase tracking-wider transition-all duration-300 transform hover:scale-105 hover:shadow-neon-purple">
+                            class="neumorph-btn text-neo-purple px-6 py-3 rounded-lg font-bold uppercase tracking-wider hover:text-white hover:bg-neo-purple transition-all duration-300">
                         <i class="fas fa-plus mr-2"></i>添加任务
                     </button>
                 </div>
@@ -126,30 +120,30 @@
         </div>
 
         <!-- 筛选和搜索 -->
-        <div class="glass rounded-xl p-6 mb-8 neon-border-cyan">
+        <div class="neumorph rounded-xl p-6 mb-8">
             <div class="space-y-4">
                 <!-- 搜索框 -->
                 <div class="relative">
                     <input type="text" id="searchInput" placeholder="搜索任务..."
-                           class="w-full bg-black bg-opacity-30 border border-cyan-500 rounded-lg px-4 py-3 pl-12 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
-                    <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-cyan-400"></i>
+                           class="neumorph-inset w-full rounded-lg px-4 py-3 pl-12 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-neo-blue">
+                    <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-neo-blue opacity-60"></i>
                 </div>
 
                 <!-- 筛选和操作按钮 -->
                 <div class="flex flex-col md:flex-row gap-3">
                     <!-- 筛选按钮 -->
                     <div class="flex flex-wrap gap-2 flex-1">
-                        <button onclick="filterTasks('all')" class="filter-btn active px-3 py-2 rounded-lg bg-purple-600 text-white text-xs md:text-sm uppercase tracking-wider">全部</button>
-                        <button onclick="filterTasks('pending')" class="filter-btn px-3 py-2 rounded-lg bg-gray-600 text-white text-xs md:text-sm uppercase tracking-wider hover:bg-pink-600 transition-colors">待完成</button>
-                        <button onclick="filterTasks('completed')" class="filter-btn px-3 py-2 rounded-lg bg-gray-600 text-white text-xs md:text-sm uppercase tracking-wider hover:bg-cyan-600 transition-colors">已完成</button>
-                        <button onclick="filterTasks('high')" class="filter-btn px-3 py-2 rounded-lg bg-gray-600 text-white text-xs md:text-sm uppercase tracking-wider hover:bg-red-600 transition-colors">高优先级</button>
-                        <button onclick="filterTasks('overdue')" class="filter-btn px-3 py-2 rounded-lg bg-gray-600 text-white text-xs md:text-sm uppercase tracking-wider hover:bg-red-600 transition-colors">已逾期</button>
+                        <button onclick="filterTasks('all')" class="filter-btn active neumorph-btn px-3 py-2 rounded-lg text-neo-purple text-xs md:text-sm font-semibold">全部</button>
+                        <button onclick="filterTasks('pending')" class="filter-btn neumorph-btn px-3 py-2 rounded-lg text-gray-500 text-xs md:text-sm font-semibold">待完成</button>
+                        <button onclick="filterTasks('completed')" class="filter-btn neumorph-btn px-3 py-2 rounded-lg text-gray-500 text-xs md:text-sm font-semibold">已完成</button>
+                        <button onclick="filterTasks('high')" class="filter-btn neumorph-btn px-3 py-2 rounded-lg text-gray-500 text-xs md:text-sm font-semibold">高优先级</button>
+                        <button onclick="filterTasks('overdue')" class="filter-btn neumorph-btn px-3 py-2 rounded-lg text-gray-500 text-xs md:text-sm font-semibold">已逾期</button>
                     </div>
 
                     <!-- 操作按钮 -->
                     <div class="flex gap-2 md:flex-shrink-0">
                         <button onclick="clearCompleted()"
-                                class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-xs md:text-sm uppercase tracking-wider transition-all duration-300 hover:shadow-neon-red whitespace-nowrap">
+                                class="neumorph-btn text-neo-red px-4 py-2 rounded-lg text-xs md:text-sm font-semibold whitespace-nowrap hover:text-white hover:bg-neo-red transition-all duration-300">
                             <i class="fas fa-trash mr-2"></i>清空已完成
                         </button>
                     </div>
@@ -158,12 +152,12 @@
         </div>
 
         <!-- 任务列表 -->
-        <div class="glass rounded-xl p-4 md:p-6 neon-border-pink">
+        <div class="neumorph rounded-xl p-4 md:p-6">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4 md:mb-6">
-                <h2 class="text-xl md:text-2xl font-bold text-pink-400 uppercase tracking-wider">
+                <h2 class="text-xl md:text-2xl font-bold text-neo-blue">
                     <i class="fas fa-list-check mr-2 md:mr-3"></i>任务列表
                 </h2>
-                <div class="text-sm text-gray-400 bg-black bg-opacity-20 rounded-lg px-3 py-1">
+                <div class="text-sm text-gray-500 neumorph-inset rounded-lg px-3 py-1 inline-block">
                     共 <span id="taskCount">0</span> 个任务
                 </div>
             </div>
@@ -172,7 +166,7 @@
             <div id="taskList" class="space-y-4 min-h-96">
                 <!-- 任务项将通过JavaScript动态生成 -->
                 <div class="text-center text-gray-400 py-12">
-                    <i class="fas fa-robot text-6xl mb-4 text-purple-400"></i>
+                    <i class="fas fa-clipboard-list text-6xl mb-4 text-neo-purple opacity-40"></i>
                     <p class="text-xl">暂无任务</p>
                     <p class="text-sm mt-2">添加您的第一个任务开始管理</p>
                 </div>
@@ -181,65 +175,65 @@
     </div>
 
     <!-- 确认删除模态框 -->
-    <div id="confirmModal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
-        <div class="glass rounded-xl p-6 md:p-8 max-w-md w-full neon-border-red">
-            <h3 class="text-xl md:text-2xl font-bold text-red-400 mb-3 md:mb-4 text-center">确认删除</h3>
-            <p class="text-gray-300 mb-4 md:mb-6 text-center text-sm md:text-base">确定要删除这个任务吗？此操作无法撤销。</p>
+    <div id="confirmModal" class="fixed inset-0 bg-gray-500 bg-opacity-20 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
+        <div class="neumorph rounded-xl p-6 md:p-8 max-w-md w-full">
+            <h3 class="text-xl md:text-2xl font-bold text-neo-red mb-3 md:mb-4 text-center">确认删除</h3>
+            <p class="text-gray-500 mb-4 md:mb-6 text-center text-sm md:text-base">确定要删除这个任务吗？此操作无法撤销。</p>
             <div class="flex flex-col md:flex-row gap-3 md:gap-4 justify-center">
                 <button onclick="closeModal()"
-                        class="px-4 md:px-6 py-2 md:py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors text-sm md:text-base">取消</button>
+                        class="neumorph-btn px-4 md:px-6 py-2 md:py-3 text-gray-500 rounded-lg text-sm md:text-base font-semibold">取消</button>
                 <button onclick="confirmDelete()"
-                        class="px-4 md:px-6 py-2 md:py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-sm md:text-base">确认删除</button>
+                        class="neumorph-btn px-4 md:px-6 py-2 md:py-3 text-neo-red rounded-lg text-sm md:text-base font-semibold hover:text-white hover:bg-neo-red transition-all duration-300">确认删除</button>
             </div>
         </div>
     </div>
 
     <!-- 清空已完成任务模态框 -->
-    <div id="clearModal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
-        <div class="glass rounded-xl p-6 md:p-8 max-w-md w-full neon-border-pink">
-            <h3 class="text-xl md:text-2xl font-bold text-pink-400 mb-3 md:mb-4 text-center">清空已完成任务</h3>
-            <p class="text-gray-300 mb-4 md:mb-6 text-center text-sm md:text-base">确定要删除所有已完成的任务吗？此操作无法撤销。</p>
+    <div id="clearModal" class="fixed inset-0 bg-gray-500 bg-opacity-20 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
+        <div class="neumorph rounded-xl p-6 md:p-8 max-w-md w-full">
+            <h3 class="text-xl md:text-2xl font-bold text-neo-orange mb-3 md:mb-4 text-center">清空已完成任务</h3>
+            <p class="text-gray-500 mb-4 md:mb-6 text-center text-sm md:text-base">确定要删除所有已完成的任务吗？此操作无法撤销。</p>
             <div class="flex flex-col md:flex-row gap-3 md:gap-4 justify-center">
                 <button onclick="closeClearModal()"
-                        class="px-4 md:px-6 py-2 md:py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors text-sm md:text-base">取消</button>
+                        class="neumorph-btn px-4 md:px-6 py-2 md:py-3 text-gray-500 rounded-lg text-sm md:text-base font-semibold">取消</button>
                 <button onclick="confirmClear()"
-                        class="px-4 md:px-6 py-2 md:py-3 bg-pink-600 hover:bg-pink-700 text-white rounded-lg transition-colors text-sm md:text-base">确认清空</button>
+                        class="neumorph-btn px-4 md:px-6 py-2 md:py-3 text-neo-orange rounded-lg text-sm md:text-base font-semibold hover:text-white hover:bg-neo-orange transition-all duration-300">确认清空</button>
             </div>
         </div>
     </div>
 
     <!-- 编辑任务模态框 -->
-    <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
-        <div class="glass rounded-xl p-4 md:p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
-            <h3 class="text-xl md:text-2xl font-bold text-cyber-cyan mb-4 md:mb-6 text-center">编辑任务</h3>
+    <div id="editModal" class="fixed inset-0 bg-gray-500 bg-opacity-20 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
+        <div class="neumorph rounded-xl p-4 md:p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <h3 class="text-xl md:text-2xl font-bold text-neo-blue mb-4 md:mb-6 text-center">编辑任务</h3>
             <form id="editForm" class="space-y-4">
                 <input type="hidden" id="editTaskId">
                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">任务标题 *</label>
+                    <label class="block text-sm font-semibold text-gray-600 mb-2">任务标题 *</label>
                     <input type="text" id="editTaskTitle" required
-                           class="w-full px-3 md:px-4 py-2 md:py-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-cyber-cyan focus:outline-none">
+                           class="neumorph-inset w-full px-3 md:px-4 py-2 md:py-3 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-neo-blue">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">任务描述</label>
+                    <label class="block text-sm font-semibold text-gray-600 mb-2">任务描述</label>
                     <textarea id="editTaskDesc" rows="3"
-                              class="w-full px-3 md:px-4 py-2 md:py-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-cyber-cyan focus:outline-none resize-none"></textarea>
+                              class="neumorph-inset w-full px-3 md:px-4 py-2 md:py-3 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-neo-blue resize-none"></textarea>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">截止日期</label>
+                    <label class="block text-sm font-semibold text-gray-600 mb-2">截止日期</label>
                     <input type="datetime-local" id="editTaskDueDate"
-                           class="w-full px-3 md:px-4 py-2 md:py-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg text-white focus:border-cyber-cyan focus:outline-none">
+                           class="neumorph-inset w-full px-3 md:px-4 py-2 md:py-3 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-neo-blue">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">优先级</label>
-                    <select id="editTaskPriority" class="w-full px-3 md:px-4 py-2 md:py-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg text-white focus:border-cyber-cyan focus:outline-none">
+                    <label class="block text-sm font-semibold text-gray-600 mb-2">优先级</label>
+                    <select id="editTaskPriority" class="neumorph-inset w-full px-3 md:px-4 py-2 md:py-3 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-neo-blue">
                         <option value="low">低优先级</option>
                         <option value="medium">中优先级</option>
                         <option value="high">高优先级</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">分类</label>
-                    <select id="editTaskCategory" class="w-full px-3 md:px-4 py-2 md:py-3 bg-black bg-opacity-20 border border-gray-600 rounded-lg text-white focus:border-cyber-cyan focus:outline-none">
+                    <label class="block text-sm font-semibold text-gray-600 mb-2">分类</label>
+                    <select id="editTaskCategory" class="neumorph-inset w-full px-3 md:px-4 py-2 md:py-3 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-neo-blue">
                         <option value="work">工作</option>
                         <option value="study">学习</option>
                         <option value="life">生活</option>
@@ -249,9 +243,9 @@
                 </div>
                 <div class="flex flex-col md:flex-row gap-3 md:gap-4 pt-4">
                     <button type="button" onclick="closeEditModal()"
-                            class="flex-1 px-4 py-2 md:py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors">取消</button>
+                            class="neumorph-btn flex-1 px-4 py-2 md:py-3 text-gray-500 rounded-lg font-semibold">取消</button>
                     <button type="submit"
-                            class="flex-1 px-4 py-2 md:py-3 bg-cyber-cyan hover:bg-cyan-600 text-white rounded-lg transition-colors">保存更改</button>
+                            class="neumorph-btn flex-1 px-4 py-2 md:py-3 text-neo-blue rounded-lg font-semibold hover:text-white hover:bg-neo-blue transition-all duration-300">保存更改</button>
                 </div>
             </form>
         </div>
@@ -259,9 +253,9 @@
 
     <!-- 使用说明 -->
     <div class="fixed bottom-2 right-2 md:bottom-4 md:right-4">
-        <div class="glass rounded-lg p-3 md:p-4 max-w-xs md:max-w-sm neon-border-purple">
-            <h3 class="text-base md:text-lg font-bold text-purple-400 mb-1 md:mb-2">使用说明</h3>
-            <ul class="text-xs md:text-sm text-gray-300 space-y-1">
+        <div class="neumorph rounded-lg p-3 md:p-4 max-w-xs md:max-w-sm">
+            <h3 class="text-base md:text-lg font-bold text-neo-purple mb-1 md:mb-2">使用说明</h3>
+            <ul class="text-xs md:text-sm text-gray-500 space-y-1">
                 <li>• 添加任务：填写标题、描述、截止日期</li>
                 <li>• 设置优先级和分类</li>
                 <li>• 点击复选框完成任务</li>
@@ -270,7 +264,7 @@
                 <li>• 使用筛选和搜索功能</li>
                 <li>• 数据自动保存到本地</li>
             </ul>
-            <div class="mt-2 md:mt-3 text-xs text-cyan-400">
+            <div class="mt-2 md:mt-3 text-xs text-neo-blue opacity-70">
                 支持响应式设计，适配移动端
             </div>
         </div>

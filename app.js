@@ -21,31 +21,33 @@ function showNotification(message, type = 'info') {
         top: 20px;
         right: 20px;
         padding: 16px 24px;
-        border-radius: 8px;
+        border-radius: 12px;
         color: white;
         font-weight: 500;
         z-index: 10000;
         transform: translateX(400px);
         transition: transform 0.3s ease-out;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 6px 6px 12px rgba(163,177,198,0.4), -4px -4px 10px rgba(255,255,255,0.6);
+        min-width: 200px;
+        max-width: 400px;
     `;
 
     // 根据类型设置样式
     switch (type) {
         case 'success':
-            notification.style.background = 'linear-gradient(45deg, #22c55e, #10b981)';
+            notification.style.background = 'linear-gradient(135deg, #6b9e78, #7cad85)';
             notification.innerHTML = `<i class="fas fa-check-circle mr-2"></i>${message}`;
             break;
         case 'error':
-            notification.style.background = 'linear-gradient(45deg, #ef4444, #dc2626)';
+            notification.style.background = 'linear-gradient(135deg, #c97b7b, #d48e8e)';
             notification.innerHTML = `<i class="fas fa-exclamation-circle mr-2"></i>${message}`;
             break;
         case 'warning':
-            notification.style.background = 'linear-gradient(45deg, #f59e0b, #d97706)';
+            notification.style.background = 'linear-gradient(135deg, #d4a574, #ddb07f)';
             notification.innerHTML = `<i class="fas fa-exclamation-triangle mr-2"></i>${message}`;
             break;
         default:
-            notification.style.background = 'linear-gradient(45deg, #8b5cf6, #7c3aed)';
+            notification.style.background = 'linear-gradient(135deg, #9b8abf, #a898cc)';
             notification.innerHTML = `<i class="fas fa-info-circle mr-2"></i>${message}`;
     }
 
@@ -75,26 +77,12 @@ function showInfo(message) { showNotification(message, 'info'); }
 
 // 初始化应用
 document.addEventListener('DOMContentLoaded', function() {
-    createParticles();
     loadTasks();
     updateStats();
     renderTasks();
     updateCountdowns();
     setInterval(updateCountdowns, 60000); // 每分钟更新倒计时
 });
-
-// 创建背景粒子
-function createParticles() {
-    const particleContainer = document.getElementById('particles');
-    for (let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.animationDelay = Math.random() * 20 + 's';
-        particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-        particleContainer.appendChild(particle);
-    }
-}
 
 // 任务构造函数
 function Task(id, title, description, dueDate, priority, category, completed = false) {
@@ -121,8 +109,8 @@ function addTask() {
     if (!title) {
         showError('请输入任务标题');
         titleElement.focus();
-        titleElement.classList.add('border-red-500');
-        setTimeout(() => titleElement.classList.remove('border-red-500'), 2000);
+        titleElement.classList.add('ring-2', 'ring-red-400');
+        setTimeout(() => titleElement.classList.remove('ring-2', 'ring-red-400'), 2000);
         return;
     }
 
@@ -177,9 +165,9 @@ function toggleTask(id) {
         // 添加完成动画
         const taskElement = document.querySelector(`[data-task-id="${id}"]`);
         if (taskElement && task.completed) {
-            taskElement.classList.add('task-complete', 'scan-complete');
+            taskElement.classList.add('task-complete');
             setTimeout(() => {
-                taskElement.classList.remove('task-complete', 'scan-complete');
+                taskElement.classList.remove('task-complete');
             }, 800);
 
             // 添加粒子效果
@@ -202,11 +190,10 @@ function createCompletionParticles(element) {
             top: ${centerY}px;
             width: 6px;
             height: 6px;
-            background: linear-gradient(45deg, #22c55e, #10b981);
+            background: linear-gradient(135deg, #6b9e78, #7cad85);
             border-radius: 50%;
             pointer-events: none;
             z-index: 1000;
-            animation: particle-burst 1s ease-out forwards;
         `;
 
         document.body.appendChild(particle);
@@ -280,20 +267,16 @@ function confirmClear() {
 function filterTasks(filter) {
     currentFilter = filter;
 
-    // 更新按钮状态
+    // 更新按钮状态 - 重置所有按钮为凸起状态
     document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.remove('active', 'bg-purple-600', 'bg-pink-600', 'bg-cyan-600', 'bg-red-600');
-        btn.classList.add('bg-gray-600');
+        btn.classList.remove('active');
+        btn.style.boxShadow = '';
     });
 
+    // 激活当前按钮 - 按下状态（inset shadow）
     const activeBtn = document.querySelector(`[onclick="filterTasks('${filter}')"]`);
     if (activeBtn) {
-        activeBtn.classList.remove('bg-gray-600');
         activeBtn.classList.add('active');
-        if (filter === 'all') activeBtn.classList.add('bg-purple-600');
-        else if (filter === 'pending') activeBtn.classList.add('bg-pink-600');
-        else if (filter === 'completed') activeBtn.classList.add('bg-cyan-600');
-        else if (filter === 'high' || filter === 'overdue') activeBtn.classList.add('bg-red-600');
     }
 
     renderTasks();
@@ -367,7 +350,7 @@ function renderTasks() {
     if (filteredTasks.length === 0) {
         taskList.innerHTML = `
             <div class="text-center text-gray-400 py-12">
-                <i class="fas fa-robot text-6xl mb-4 text-purple-400"></i>
+                <i class="fas fa-clipboard-list text-6xl mb-4 text-neo-purple opacity-50"></i>
                 <p class="text-xl">${searchTerm ? '未找到匹配的任务' : '暂无任务'}</p>
                 <p class="text-sm mt-2">${searchTerm ? '尝试其他搜索词' : '添加您的第一个任务开始管理'}</p>
             </div>
@@ -389,29 +372,29 @@ function createTaskHTML(task) {
     const countdown = getCountdown(task.dueDate);
 
     return `
-        <div class="glass glass-hover rounded-lg p-4 md:p-6 ${task.priority === 'high' ? 'priority-high' : task.priority === 'medium' ? 'priority-medium' : 'priority-low'} ${task.completed ? 'opacity-60' : ''} slide-in" data-task-id="${task.id}">
+        <div class="neumorph-task rounded-2xl p-4 md:p-6 ${task.completed ? 'opacity-60' : ''} slide-in" data-task-id="${task.id}">
             <div class="flex items-start justify-between">
                 <div class="flex items-start space-x-3 md:space-x-4 flex-1">
                     <button onclick="toggleTask(${task.id})"
-                            class="w-6 h-6 md:w-8 md:h-8 rounded-full border-2 ${task.completed ? 'bg-green-500 border-green-500' : 'border-gray-400'} flex items-center justify-center transition-all duration-300 hover:scale-110 mt-0.5 md:mt-1 flex-shrink-0">
+                            class="w-6 h-6 md:w-8 md:h-8 rounded-full border-2 ${task.completed ? 'bg-neo-green border-neo-green' : 'border-gray-400'} flex items-center justify-center transition-all duration-300 hover:scale-110 mt-0.5 md:mt-1 flex-shrink-0 shadow-[2px_2px_4px_rgba(163,177,198,0.4),-1px_-1px_3px_rgba(255,255,255,0.8)]">
                         ${task.completed ? '<i class="fas fa-check text-white text-xs md:text-sm"></i>' : ''}
                     </button>
 
                     <div class="flex-1 min-w-0">
-                        <h3 class="text-lg md:text-xl font-bold ${task.completed ? 'line-through text-gray-400' : 'text-white'} mb-2 md:mb-3 break-words">
+                        <h3 class="text-lg md:text-xl font-bold ${task.completed ? 'line-through text-gray-400' : 'text-gray-700'} mb-2 md:mb-3 break-words">
                             ${task.title}
                         </h3>
-                        ${task.description ? `<p class="text-gray-300 text-sm md:text-base mb-3 md:mb-4 leading-relaxed break-words">${task.description}</p>` : ''}
+                        ${task.description ? `<p class="text-gray-500 text-sm md:text-base mb-3 md:mb-4 leading-relaxed break-words">${task.description}</p>` : ''}
 
                         <div class="grid grid-cols-1 gap-3 md:gap-4">
                             <!-- 分类和优先级 -->
                             <div class="space-y-2">
                                 <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">分类 & 优先级</div>
                                 <div class="flex flex-wrap gap-2">
-                                    <span class="category-${task.category} px-3 py-1 md:px-4 md:py-2 rounded-lg text-white text-xs md:text-sm font-medium uppercase tracking-wider inline-flex items-center">
+                                    <span class="category-${task.category} px-3 py-1 md:px-4 md:py-2 rounded-lg text-white text-xs md:text-sm font-medium uppercase tracking-wider inline-flex items-center shadow-sm">
                                         <i class="fas ${getCategoryIcon(task.category)} mr-1 md:mr-2"></i>${getCategoryName(task.category)}
                                     </span>
-                                    <span class="priority-${task.priority} px-3 py-1 md:px-4 md:py-2 rounded-lg text-white text-xs md:text-sm font-medium uppercase tracking-wider inline-flex items-center">
+                                    <span class="priority-${task.priority} px-3 py-1 md:px-4 md:py-2 rounded-lg text-white text-xs md:text-sm font-medium uppercase tracking-wider inline-flex items-center shadow-sm">
                                         <i class="fas ${getPriorityIcon(task.priority)} mr-1 md:mr-2"></i>${getPriorityName(task.priority)}
                                     </span>
                                 </div>
@@ -422,35 +405,35 @@ function createTaskHTML(task) {
                                 <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">时间信息</div>
 
                                 <!-- 创建时间 -->
-                                <div class="flex items-center text-gray-300 text-xs md:text-sm bg-black bg-opacity-20 rounded-lg p-2 md:p-3">
-                                    <i class="fas fa-plus-circle mr-2 md:mr-3 text-green-400 text-sm md:text-lg flex-shrink-0"></i>
+                                <div class="flex items-center text-gray-500 text-xs md:text-sm neumorph-inset rounded-lg p-2 md:p-3">
+                                    <i class="fas fa-plus-circle mr-2 md:mr-3 text-neo-green text-sm md:text-lg flex-shrink-0"></i>
                                     <div class="flex-1 min-w-0">
                                         <div class="text-xs text-gray-400 mb-0.5">创建时间</div>
-                                        <div class="font-medium truncate">${formatDateTime(task.createdAt)}</div>
+                                        <div class="font-medium truncate text-gray-600">${formatDateTime(task.createdAt)}</div>
                                     </div>
                                 </div>
 
                                 <!-- 截止时间 -->
                                 ${task.dueDate ? `
-                                    <div class="flex items-center text-xs md:text-sm bg-black bg-opacity-20 rounded-lg p-2 md:p-3">
-                                        <i class="fas fa-hourglass-end mr-2 md:mr-3 ${isOverdueTask ? 'text-red-400' : 'text-cyan-400'} text-sm md:text-lg flex-shrink-0"></i>
+                                    <div class="flex items-center text-xs md:text-sm neumorph-inset rounded-lg p-2 md:p-3">
+                                        <i class="fas fa-hourglass-end mr-2 md:mr-3 ${isOverdueTask ? 'text-neo-red' : 'text-neo-blue'} text-sm md:text-lg flex-shrink-0"></i>
                                         <div class="flex-1 min-w-0">
                                             <div class="text-xs text-gray-400 mb-0.5">截止时间</div>
-                                            <div class="font-medium ${isOverdueTask ? 'text-red-400' : 'text-cyan-400'} truncate">${formatDateTime(task.dueDate)}</div>
+                                            <div class="font-medium ${isOverdueTask ? 'text-neo-red' : 'text-neo-blue'} truncate">${formatDateTime(task.dueDate)}</div>
                                         </div>
                                     </div>
 
                                     <!-- 倒计时 -->
-                                    <div class="flex items-center text-xs md:text-sm bg-black bg-opacity-20 rounded-lg p-2 md:p-3">
+                                    <div class="flex items-center text-xs md:text-sm neumorph-inset rounded-lg p-2 md:p-3">
                                         <i class="fas fa-stopwatch mr-2 md:mr-3 ${getCountdownIconStyle(task.dueDate, isOverdueTask)} text-sm md:text-lg flex-shrink-0"></i>
                                         <div class="flex-1 min-w-0">
                                             <div class="text-xs text-gray-400 mb-0.5">剩余时间</div>
-                                            <div class="font-mono font-bold ${getCountdownTextStyle(task.dueDate, isOverdueTask)} countdown-display truncate">
+                                            <div class="font-mono font-bold ${getCountdownTextStyle(task.dueDate, isOverdueTask)} truncate">
                                                 ${countdown}
                                             </div>
                                         </div>
                                     </div>
-                                ` : '<div class="text-gray-500 text-xs md:text-sm bg-black bg-opacity-20 rounded-lg p-2 md:p-3 text-center">无截止日期</div>'}
+                                ` : '<div class="text-gray-400 text-xs md:text-sm neumorph-inset rounded-lg p-2 md:p-3 text-center">无截止日期</div>'}
                             </div>
 
                             <!-- 状态指示器 -->
@@ -458,20 +441,20 @@ function createTaskHTML(task) {
                                 <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">状态</div>
                                 <div class="flex flex-wrap gap-2">
                                     ${task.completed ? `
-                                                <div class="flex items-center text-green-400 text-xs md:text-sm bg-green-500 bg-opacity-10 rounded-lg px-3 py-1 md:px-4 md:py-2 border border-green-500 border-opacity-30">
+                                                <div class="flex items-center text-neo-green text-xs md:text-sm bg-neo-green bg-opacity-15 rounded-lg px-3 py-1 md:px-4 md:py-2 border border-neo-green border-opacity-30">
                                                     <i class="fas fa-check-circle mr-1 md:mr-2"></i>
                                                     <span class="font-medium">已完成</span>
                                                 </div>
                                             ` : `
-                                                <div class="flex items-center text-yellow-400 text-xs md:text-sm bg-yellow-500 bg-opacity-10 rounded-lg px-3 py-1 md:px-4 md:py-2 border border-yellow-500 border-opacity-30">
+                                                <div class="flex items-center text-neo-orange text-xs md:text-sm bg-neo-orange bg-opacity-15 rounded-lg px-3 py-1 md:px-4 md:py-2 border border-neo-orange border-opacity-30">
                                                     <i class="fas fa-clock mr-1 md:mr-2"></i>
                                                     <span class="font-medium">进行中</span>
                                                 </div>
                                             `}
 
                                     ${isOverdueTask && !task.completed ? `
-                                                <div class="flex items-center text-red-400 text-xs md:text-sm bg-red-500 bg-opacity-10 rounded-lg px-3 py-1 md:px-4 md:py-2 border border-red-500 border-opacity-30 pulse-urgent">
-                                                    <i class="fas fa-exclamation-triangle mr-1 md:mr-2 animate-pulse"></i>
+                                                <div class="flex items-center text-neo-red text-xs md:text-sm bg-neo-red bg-opacity-15 rounded-lg px-3 py-1 md:px-4 md:py-2 border border-neo-red border-opacity-30 font-bold">
+                                                    <i class="fas fa-exclamation-triangle mr-1 md:mr-2"></i>
                                                     <span class="font-medium">已逾期</span>
                                                 </div>
                                             ` : ''}
@@ -483,17 +466,15 @@ function createTaskHTML(task) {
 
                 <div class="flex items-center space-x-1 md:space-x-2 ml-2 md:ml-4 flex-shrink-0">
                     <button onclick="showEditModal(${task.id})"
-                            class="text-cyan-400 hover:text-cyan-300 transition-colors p-2 md:p-3 hover:bg-cyan-500 hover:bg-opacity-20 rounded-lg">
+                            class="neo-icon-btn text-neo-blue p-2 md:p-3">
                         <i class="fas fa-edit text-sm md:text-base"></i>
                     </button>
                     <button onclick="deleteTask(${task.id})"
-                            class="text-red-400 hover:text-red-300 transition-colors p-2 md:p-3 hover:bg-red-500 hover:bg-opacity-20 rounded-lg">
+                            class="neo-icon-btn text-neo-red p-2 md:p-3">
                         <i class="fas fa-trash-alt text-sm md:text-base"></i>
                     </button>
                 </div>
             </div>
-
-            ${task.completed ? '<div class="scan-line mt-3 md:mt-4"></div>' : ''}
         </div>
     `;
 }
@@ -627,7 +608,7 @@ function getCountdown(dueDate) {
 // 获取倒计时图标样式
 function getCountdownIconStyle(dueDate, isOverdue) {
     if (isOverdue) {
-        return 'text-red-400 animate-pulse';
+        return 'text-neo-red';
     }
 
     const now = new Date();
@@ -636,18 +617,18 @@ function getCountdownIconStyle(dueDate, isOverdue) {
     const hours = Math.floor(diff / (1000 * 60 * 60));
 
     if (hours <= 1) {
-        return 'text-red-400 animate-pulse';
+        return 'text-neo-red';
     } else if (hours <= 24) {
-        return 'text-yellow-400';
+        return 'text-neo-orange';
     } else {
-        return 'text-cyan-400';
+        return 'text-neo-blue';
     }
 }
 
 // 获取倒计时文本样式
 function getCountdownTextStyle(dueDate, isOverdue) {
     if (isOverdue) {
-        return 'text-red-400 pulse-urgent font-bold';
+        return 'text-neo-red font-bold';
     }
 
     const now = new Date();
@@ -656,11 +637,11 @@ function getCountdownTextStyle(dueDate, isOverdue) {
     const hours = Math.floor(diff / (1000 * 60 * 60));
 
     if (hours <= 1) {
-        return 'text-red-400 pulse-neon font-bold';
+        return 'text-neo-red font-bold';
     } else if (hours <= 24) {
-        return 'text-yellow-400 font-semibold';
+        return 'text-neo-orange font-semibold';
     } else {
-        return 'text-cyan-400';
+        return 'text-neo-blue';
     }
 }
 
@@ -695,7 +676,7 @@ function initDragAndDrop() {
     if (taskList.children.length > 1) {
         new Sortable(taskList, {
             animation: 150,
-            handle: '.glass',
+            handle: '.neumorph-task',
             onEnd: function() {
                 // 重新排序tasks数组
                 const taskElements = taskList.children;
