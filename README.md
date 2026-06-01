@@ -1,18 +1,20 @@
-# NEXUS • TASK - 未来任务管理系统
+# NEXUS • TASK - 智能任务管理系统
 
-![NEXUS TASK](https://img.shields.io/badge/NEXUS-TASK-blue?style=for-the-badge)
+![NEXUS TASK](https://img.shields.io/badge/NEXUS-TASK-purple?style=for-the-badge)
+![Cloudflare Pages](https://img.shields.io/badge/Cloudflare-Pages-orange?style=flat-square)
 
-一个现代化的赛博朋克风格任务管理系统，具有炫酷的UI界面和完整的任务管理功能。
+一个**新拟态（Neumorphism）风格**的智能任务管理系统，纯前端单页应用，无需后端服务。
 
 ## 🌟 项目特色
 
-- ✨ **赛博朋克风格UI** - 炫酷的霓虹灯效果和深色主题
-- 🎨 **现代化设计** - 使用Tailwind CSS构建的响应式界面
+- 🎨 **新拟态风格UI** - 柔和的光影层次，3D凸起/凹陷质感
 - 📱 **移动端友好** - 完美适配各种设备尺寸
 - 🎯 **任务管理** - 完整的任务增删改查功能
 - 📊 **统计面板** - 实时显示任务完成情况和统计数据
-- 🎪 **拖拽排序** - 使用SortableJS实现的任务拖拽排序
+- 🔄 **拖拽排序** - 使用SortableJS实现的任务拖拽排序
+- ⏰ **倒计时提醒** - 任务截止时间倒计时与逾期标记
 - 💾 **本地存储** - 任务数据自动保存到浏览器localStorage
+- 🚀 **自动部署** - 推送GitHub即自动部署到Cloudflare Pages
 
 ## 🛠️ 技术栈
 
@@ -20,30 +22,32 @@
 - **Tailwind CSS** - 原子化CSS框架
 - **原生JavaScript** - 无框架依赖的纯JS实现
 - **SortableJS** - 拖拽排序库
+- **Chart.js** - 统计图表
 - **Font Awesome** - 图标库
-- **Google Fonts** - Orbitron字体
+- **Google Fonts** - Nunito字体
+- **Cloudflare Pages** - 自动部署托管
 
 ## 📁 项目结构
 
 ```
 TodoLists2/
-├── nexus-task-3.0.html     # 主应用文件
-├── styles.css              # 赛博朋克主题样式
-├── app.js                  # 应用逻辑代码
-├── .gitignore              # Git配置
-├── README.md               # 项目文档
-└── CLAUDE.md               # 开发指南
+├── index.html               # 主应用入口文件
+├── styles.css               # 新拟态主题样式
+├── app.js                   # 应用逻辑代码
+├── _redirects               # Cloudflare Pages 路由规则
+├── .github/workflows/deploy.yml  # GitHub Actions 自动部署
+├── .gitignore               # Git配置
+├── README.md                # 项目文档
+└── CLAUDE.md                # 开发指南
 ```
 
 ## 🚀 快速开始
 
 ### 在线使用
 
-1. 克隆或下载本项目到本地
-2. 使用现代浏览器打开 `nexus-task-3.0.html` 文件
-3. 开始管理你的任务！
+直接访问：**https://todolists2.pages.dev**
 
-### 开发环境
+### 本地运行
 
 由于是纯前端项目，无需构建步骤：
 
@@ -54,62 +58,59 @@ git clone https://github.com/maqilong-lab/TodoLists2.git
 # 进入项目目录
 cd TodoLists2
 
-# 使用任意HTTP服务器运行（推荐）
+# 使用任意HTTP服务器运行
 npx serve .
 # 或使用Python内置服务器
 python -m http.server 8000
 ```
 
+浏览器打开 `http://localhost:8000` 即可使用。
+
 ## 🎮 功能说明
 
 ### 任务管理
-- **添加任务** - 点击"ADD NEW"按钮创建新任务
-- **编辑任务** - 点击任务右侧的编辑按钮
-- **删除任务** - 点击删除按钮移除任务
-- **标记完成** - 点击复选框标记任务完成状态
-- **优先级设置** - 支持高中低三个优先级
-- **分类管理** - 为任务添加分类标签
+- **添加任务** - 填写标题、描述、截止日期后添加
+- **编辑任务** - 点击任务右侧的编辑按钮修改
+- **删除任务** - 点击删除按钮移除，带确认弹窗
+- **标记完成** - 点击圆形复选框切换完成状态
+- **优先级设置** - 支持高、中、低三个优先级
+- **分类管理** - 工作、学习、生活、个人等分类
 
 ### 界面特性
-- **暗黑模式** - 默认使用赛博朋克暗黑主题
-- **霓虹灯效果** - 炫酷的发光边框和阴影
+- **新拟态设计** - 柔和光影，凸起/凹陷质感切换
+- **微交互反馈** - 按钮按下缩放、卡片悬浮提升、粒子完成效果
 - **响应式布局** - 适配桌面和移动设备
-- **动画效果** - 平滑的过渡动画
+- **倒计时显示** - 实时显示任务剩余时间
 
 ### 数据持久化
 - **自动保存** - 所有更改自动保存到localStorage
 - **数据恢复** - 刷新页面后数据保持不变
-- **导出导入** - 支持任务数据的备份和恢复
 
 ## 🎨 主题色彩
 
-- **赛博紫** `#8b5cf6` - 主要强调色
-- **赛博青** `#06b6d4` - 次要强调色  
-- **赛博粉** `#ec4899` - 警告和提示色
-- **赛博红** `#ef4444` - 错误和危险操作
-- **暗黑背景** `#0a0a0a` - 主背景色
+- **背景色** `#e0e5ec` - 新拟态标志性浅灰背景
+- **主色调** `#7c9cbf` - 蓝色系强调色
+- **成功色** `#6b9e78` - 完成任务绿色
+- **警告色** `#d4a574` - 橙色系提示
+- **危险色** `#c97b7b` - 删除操作红色
+- **辅助色** `#9b8abf` - 紫色系点缀
 
-## 🔧 自定义配置
+## ☁️ 自动部署
 
-### Tailwind配置
-项目中已预设赛博朋克主题配置，你可以在HTML文件的`<head>`部分修改：
+每次推送 `master` 分支后，Cloudflare Pages 会自动部署：
 
-```javascript
-tailwind.config = {
-    theme: {
-        extend: {
-            colors: {
-                'cyber-purple': '#8b5cf6',  // 修改为你喜欢的颜色
-                // ... 其他颜色配置
-            }
-        }
-    }
-}
+```bash
+# 提交并推送
+git add .
+git commit -m "your changes"
+git push origin master
 ```
+
+部署状态可在 [Cloudflare Dashboard](https://dash.cloudflare.com/) 查看。
 
 ## 📈 版本历史
 
-- **v3.0** - 当前版本，包含任务编辑功能的完整任务管理系统
+- **v3.0** - 新拟态风格重构，支持任务编辑、倒计时、Cloudflare Pages自动部署
 
 ## 🤝 贡献指南
 
@@ -123,15 +124,8 @@ tailwind.config = {
 
 ## 📄 许可证
 
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
-
-## 🙏 致谢
-
-- [Tailwind CSS](https://tailwindcss.com/) - 优秀的CSS框架
-- [SortableJS](https://sortablejs.github.io/Sortable/) - 强大的拖拽库
-- [Font Awesome](https://fontawesome.com/) - 丰富的图标库
-- [Google Fonts](https://fonts.google.com/) - Orbitron字体
+本项目采用 MIT 许可证。
 
 ---
 
-**开始你的未来任务管理之旅！** 🚀
+**开始管理你的任务！** https://todolists2.pages.dev
